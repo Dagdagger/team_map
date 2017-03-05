@@ -1,0 +1,9 @@
+<%= form_tag events_path, method: :get do  %>
+
+	<%= label :location, "Search for events near: " %>
+	<%= text_field_tag  :location, params[:location], placeholder: "city, state, zip, address" %>
+
+	<%= label :distance, "Distance: " %>
+	<%= select_tag :distance,  options_for_select([["within 20 miles", "20"], ["within 10 miles", "10"]]), class: "Form-control" %>
+	<%= submit_tag "Find Events", :name => nil,  class: "btn btn-primary" %>
+<% end %>
