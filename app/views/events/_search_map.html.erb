@@ -1,10 +1,9 @@
 <script type="text/javascript">
 handler = Gmaps.build('Google');
 handler.buildMap({
-	provider: { mapTypeId: google.maps.MapTypeId.HYBRID, maxZoom: 1 },
+	provider: { mapTypeId: google.maps.MapTypeId.HYBRID, maxZoom: 5 },
 	internal: {id: 'map'}},function(){
-	markers = handler.addMarkers(<%=raw @hash.to_json %>);
-	handler.bounds.extendWith(markers);
-	handler.gitMapToBounds();
+	var markersData = <%= raw @hash.to_json %>;
+	updateMarkers(handler, markersData);
 });
 </script>

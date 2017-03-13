@@ -21,7 +21,10 @@ class EventsController < ApplicationController
   # GET /event/1
   # GET /events/1.json
   def show
+
+	if @event.need != 0
 	@event.update_attribute(:need, @event.need - 1)
+	end
   end
 
 

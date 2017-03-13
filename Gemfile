@@ -25,6 +25,7 @@ gem 'geocoder'
 gem 'devise'
 gem "gritter", "1.2.0"
 gem "twilio-ruby"
+gem "jquery-rails"
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

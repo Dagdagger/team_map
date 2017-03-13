@@ -16,8 +16,8 @@
             <th>Name</th>
             <th>Address</th>
             <th>Sport</th>
-		<th>Needs</th>
-            <th></th>
+	    <th>Needs</th>
+        <th></th>
         <th></th>
         <th></th>
 	<th></th>
@@ -29,10 +29,10 @@
             <td><%= event.name %></td>
             <td><%= event.address %></td>
             <td><%= event.sport %></td>
-		<td><%= event.need %></td>
+	    <td><%= event.need %></td>
             <td><%= link_to "Join", event, data: {confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Edit', edit_event_path(event) %></td>
+            <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
     </tbody>
   </table>
@@ -40,6 +40,7 @@
 <div style='width: 800px;'>
  <div id="map" style='width: 800px; height: 400px;'></div>
 </div>
+<style>body{padding-left:70px;}</style>
 
 <script type="text/javascript">
 handler = Gmaps.build('Google');
