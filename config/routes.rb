@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  resources :posts
   resources :trainers
   devise_for :users
-  root 'events#index'
+  root 'home#index'
   post 'twilio/voice' => 'twilio#voice'
   devise_for :models
   get 'events/search' => 'events#search'

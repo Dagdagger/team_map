@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170312102541) do
+ActiveRecord::Schema.define(version: 20170821094121) do
+
+  create_table "coaches", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.float    "latitude"
@@ -23,34 +28,16 @@ ActiveRecord::Schema.define(version: 20170312102541) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.datetime "birthdate"
-    t.string   "telephone"
-    t.string   "gender"
-    t.integer  "rating"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "posts", force: :cascade do |t|
+    t.string   "attachment"
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "ratings", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sports", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "trainers", force: :cascade do |t|
-    t.string   "name"
-    t.text     "biography"
-    t.integer  "rating"
-    t.integer  "trainer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
