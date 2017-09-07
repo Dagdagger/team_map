@@ -39,7 +39,10 @@
 	<% if !current_user %>
 		<li>
 		<%= link_to "Login", new_user_session_path, :class => ""%>
-		<% end %>	
+		</li>
+		<li>
+			<%= link_to "Sign Up!", new_user_registration_path %>
+		<% end %>
 		</li>
 
 		<% if current_user %>
@@ -48,6 +51,9 @@
 	</li>
 	<li>
 		<%= link_to "Search for Nearby Events", events_search_url %>
+	</li>
+	<li>
+		<%= link_to "Edit Account", edit_user_registration_path %>
 	</li>
 		
 		<li>
