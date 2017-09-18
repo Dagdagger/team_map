@@ -9,8 +9,8 @@ end
 
 
 def show
-	@user = User.find(params[:id])
-
+	@user = current_user
+	@profile = @user.profile
 end
 
 

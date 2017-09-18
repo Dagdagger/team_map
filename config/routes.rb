@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   devise_for :models
   get 'events/search' => 'events#search'
   get  'events/hello'  => 'events#hello'
+  get 'profiles/:id' => 'profiles#show'
+  get 'profiles/:id/new' => 'profiles#new'
   resources :events
   resources :users
   resources :profiles
