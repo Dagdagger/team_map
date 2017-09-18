@@ -1,0 +1,33 @@
+<%= form_for(@profile, html: { class: "form-horizontal", role: "form" } ) do |f|%>
+	<div class = "form-group">
+		<%= f.label :age %>
+		<div class= "col-sm-5">
+		<%= f.text_field :age, class: "form-control" %>
+	</div>
+	</div>
+
+
+	<div class = "form-group">
+		<%= f.label :address %>
+		<div class = "col-sm-5">
+		<%= f.text_field :address, class: "form-control" %>
+	</div>
+	</div>
+
+	<div class = "form-group">
+		<%= f.label :description, "Write something aboiut yourself!" %>
+		<div class = "col-sm-20" %>
+		<%= f.text_area :description %>
+		</div>
+	</div>
+	<div class = "form-group">
+		<%= f.label :birthdate, "Birthdate" %>
+		<%= f.date_select :birthdate %>
+	</div>
+	<p>
+	<%= f.submit 'create' %>
+	</p>
+<% end %>
+
+
+
