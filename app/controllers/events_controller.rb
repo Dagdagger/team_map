@@ -15,7 +15,7 @@ class EventsController < ApplicationController
     marker.lng event.longitude
     marker.infowindow event.sport
 	end
-   end
+     end
   end
 
   # GET /event/1
@@ -45,9 +45,6 @@ end
 
 
 
-
-
-		
   # GET /events/new
   def new
     @event = Event.new

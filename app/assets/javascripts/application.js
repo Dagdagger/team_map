@@ -18,3 +18,4 @@
 //= require Underscore
 //= require gmaps/google
 //= require gritter
+//= require cable

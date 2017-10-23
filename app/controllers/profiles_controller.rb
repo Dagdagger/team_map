@@ -13,10 +13,10 @@ class ProfilesController < ApplicationController
 
 	def update
 		if current_user.profile.update_attributes(profile_params)
-		redirect_to profile_path 
+		redirect_to profile_path
 		end
 	end
-	
+
 	def edit
 		@profile = current_user.profile
 	end
@@ -27,7 +27,7 @@ class ProfilesController < ApplicationController
 		respond_to do |format|
 		if @profile.save
 			redirect_to profile_path
-		else 
+		else
 			format.html { redirect_to root_url, notice: 'Error in creating Profile' }
 		end
 		end
@@ -37,6 +37,6 @@ class ProfilesController < ApplicationController
 	private
 
 	def profile_params
-		params.require(:profile).permit(:age, :address, :description, :birthdate)
+	params.require(:profile).permit(:age, :address, :description, :birthdate, :sport, :sportdescription, :skill)
 	end
 end

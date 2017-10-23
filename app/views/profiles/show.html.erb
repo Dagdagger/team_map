@@ -1,8 +1,22 @@
-<h1> This is a profile show action </h1>
+<h1 style = "text-align-center"> This is a profile show action </h1>
 
-<%= @profile.age %>
+<h2> My age is </h2>
+<%=  @profile.age %>
+<br>
 
+<h2> A little something about me </h2>
+<%=  @profile.description %>
+<br>
 
-
-
+<h2> You can find me at </h2>
+<%=  @profile.address %>
+<br>
+<h2> I play </h2>
+<%= @profile.sport %>
+<br>
+<h2> Here is a little about it </h2>
+<%= @profile.sportdescription %>
+<br>
+<h2> My skill level is : <%= @profile.skill %> </h2>
+<br>
 <%= link_to "edit Profile", edit_profile_path %>

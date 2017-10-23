@@ -15,7 +15,7 @@
 	</div>
 
 	<div class = "form-group">
-		<%= f.label :description, "Write something aboiut yourself!" %>
+		<%= f.label :description, "Write something about yourself!" %>
 		<div class = "col-sm-20" %>
 		<%= f.text_area :description %>
 		</div>
@@ -24,10 +24,28 @@
 		<%= f.label :birthdate, "Birthdate" %>
 		<%= f.date_select :birthdate %>
 	</div>
-	<p>
-	<%= f.submit 'create' %>
-	</p>
-<% end %>
+	<div class = "form-group">
+		<%= f.label :sport, "Main Sport" %>
+		<div class = "col-sm-20" %>
+		<%= f.text_field :sport, class: "form-control" %>
+		</div>
+	</div>
+	<div class = "form-group">
+		<%= f.label :sportdescription, "Write Something about your preferred Sport" %>
+		<div class = "col-sm-20" %>
+		<%= f.text_area :sportdescription, class: "form-control" %>
+		</div>
+		</div>
+		<div class = "form-group">
+			<%= f.label :skill, "What is your skill level in this sport?" %>
+			<div class = "col-sm-20" %>
+			<%= f.select :skill, (0..10), class: "form-control" %>
+			</div>
+		</div>
 
 
+	<div class="actions">
+		<%= f.submit 'Update!' %>
+	</div>
 
+	<% end %>

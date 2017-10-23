@@ -1,0 +1,13 @@
+<div>
+	<%= f.label :name, "Name" %>
+	<%= f.text_field :name %>
+	<br>
+
+
+	<%= f.label :description, "description" %>
+	<%= f.text_area :description %>
+	<br>
+
+	<%= f.label :skill, "skill" %>
+	<%= f.select :skill, (0..10) %>
+</div>

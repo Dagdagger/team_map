@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'trainers/index'
+
+  get 'trainer/index'
+
+  get 'trainer/index'
+  resources :chat_rooms, only: [:new, :create, :show, :index]
+  mount ActionCable.server => '/cable'
   resources :posts
   resources :trainers
   devise_for :users
