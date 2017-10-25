@@ -38,12 +38,18 @@
         <ul class="nav navbar-nav">
 	<% if !current_user %>
 		<li>
-		<%= link_to "Login", new_user_session_path, :class => ""%>
+		<%= link_to "User Login", new_user_session_path, :class => ""%>
 		</li>
 		<li>
-			<%= link_to "Sign Up!", new_user_registration_path %>
-		<% end %>
+			<%= link_to "User Sign Up!", new_user_registration_path %>
 		</li>
+		<li>
+			<%= link_to "Coach Sign Up", new_coach_registration_path %> 
+		</li>
+		<li>
+			<%= link_to "Coach Login", new_coach_session_path, :class => "" %>
+		</li>
+<% end %>
 
 		<% if current_user %>
 	<li>
