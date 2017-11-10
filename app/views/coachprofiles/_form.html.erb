@@ -1,0 +1,53 @@
+<%= form_for(@coachprofile, html: { class: "form-horizontal", role: "form" } ) do |f|%>
+	<div class = "field">
+		<%= f.label :price, "Price you're charging for your services" %>
+		<div class= "col-sm-5">
+		<%= f.text_field :price, class: "form-control" %>
+	</div>
+	</div>
+
+	<div class = "field">
+		<%= f.label :description, "Write something about yourself!" %>
+		<div class = "col-sm-20" %>
+		<%= f.text_area :description %>
+		</div>
+	</div>
+
+	<div class = "field">
+		<%= f.label :birthdate, "Birthdate" %>
+		<%= f.date_select :birthdate %>
+	</div>
+	<div class = "field">
+		<%= f.label :sport, "Sport you teach" %>
+		<div class = "col-sm-20" %>
+		<%= f.text_field :sport, class: "form-control" %>
+		</div>
+	</div>
+
+	<div class = "field">
+		<%= f.label :, "" %>
+		<div class = "col-sm-20" %>
+		<%= f.text_field :, class: "form-control" %>
+		</div>
+	</div>
+
+	<div class = "field">
+		<%= f.label :, "you teach" %>
+		<div class = "col-sm-20" %>
+		<%= f.text_field :, class: "form-control" %>
+		</div>
+	</div>
+
+	<div class = "field">
+		<%= f.label :, "Sport you teach" %>
+		<div class = "col-sm-20" %>
+		<%= f.text_field :, class: "form-control" %>
+		</div>
+	</div>
+
+
+	<div class="actions">
+		<%= f.submit 'Update!' %>
+	</div>
+
+	<% end %>

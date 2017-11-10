@@ -11,6 +11,7 @@ gem 'rails', '~> 5.0.2'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 gem 'record_tag_helper'
+gem 'dotenv-rails', :groups => [:development, :test]
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -26,6 +27,8 @@ gem 'geocoder'
 gem 'devise'
 gem "gritter", "1.2.0"
 gem "twilio-ruby"
+gem 'carrierwave', '~> 0.10.0'
+gem 'mini_magick', '~> 4.3'
 gem 'redis', '~> 3.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

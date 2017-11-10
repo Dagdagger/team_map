@@ -1,0 +1,19 @@
+<h1 style = "text-align-center"> This is a profile show action </h1>
+
+<h2> I was born on </h2>
+<%=  @coachprofile.birthdate %>
+<br>
+
+<h2> A little something about me </h2>
+<%=  @coachprofile.description %>
+<br>
+
+<h2> You can find me at </h2>
+<%=  @coachprofile.address %>
+<br>
+<h2> I play </h2>
+<%= @coachprofile.sport %>
+<br>
+<h2> My price is </h2>
+<%= @coachprofile.price %>
+<%= link_to "edit Profile", edit_profile_path %>

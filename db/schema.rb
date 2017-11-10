@@ -10,19 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171023235430) do
+ActiveRecord::Schema.define(version: 20171107175647) do
 
   create_table "chat_rooms", force: :cascade do |t|
     t.string   "title"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.         "references"
+    t.string   "coach_id"
     t.index ["user_id"], name: "index_chat_rooms_on_user_id"
   end
 
   create_table "coaches", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "coachprofiles", force: :cascade do |t|
+    t.datetime "birthdate"
+    t.string   "sport"
+    t.integer  "price"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "coach_id"
+    t.string   "phonenumber"
+    t.boolean  "location"
+    t.string   "address"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "username"
   end
 
   create_table "events", force: :cascade do |t|
@@ -42,6 +61,8 @@ ActiveRecord::Schema.define(version: 20171023235430) do
     t.integer  "chat_room_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.         "references"
+    t.string   "coach_id"
     t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
