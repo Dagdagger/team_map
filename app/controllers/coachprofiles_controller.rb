@@ -37,6 +37,6 @@ class CoachprofilesController < ApplicationController
 	private
 
 	def coachprofile_params
-	params.require(:coachprofile).permit(:address, :description, :birthdate, :sport, :description, :price, :firstname, :lastname, )
+	params.require(:coachprofile).permit(:address, :description, :birthdate, :sport, :price, :firstname, :lastname, )
 	end
 end

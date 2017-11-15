@@ -10,6 +10,7 @@ end
 gem 'rails', '~> 5.0.2'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+gem 'faye'
 gem 'record_tag_helper'
 gem 'dotenv-rails', :groups => [:development, :test]
 # Use Puma as the app server

@@ -19,6 +19,7 @@ end
 
 authenticated :user do
   resources :charges
+  get 'thanks', to: 'charges#thanks', as: 'thanks'
   resources :chat_rooms, only: [:new, :create, :show, :index]
   get 'events/search' => 'events#search'
   get 'events/hello'  => 'events#hello'

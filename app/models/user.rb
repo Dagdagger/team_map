@@ -5,7 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
  after_create :create_profile
- has_one :event 
+ has_many :instamessages
+ has_many :conversations, foreign_key: :sender_id
+ has_one :event
  has_one :profile
  has_many :chat_rooms, dependent: :destroy
  has_many :messages, dependent: :destroy
