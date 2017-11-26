@@ -25,6 +25,7 @@ authenticated :user do
   get 'events/hello'  => 'events#hello'
   get 'profiles/:id' => 'profiles#show'
   get 'profiles/:id/new' => 'profiles#new'
+  get 'coachprofiles/index' => 'coachprofiles#index'
   resources :events
   resources :users
   resources :profiles

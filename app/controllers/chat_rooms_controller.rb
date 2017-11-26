@@ -11,13 +11,9 @@ class ChatRoomsController < ApplicationController
 		@message = Message.new
 	end
 
-	def create 
+	def create
 		if user_signed_in?
 		@chat_room = current_user.chat_rooms.build(chat_room_params)
-		end
-
-		if coach_signed_in?
-			@chat_room = current_coach.chat_rooms.build(chat_room_params)
 		end
 		if @chat_room.save
 			flash[:success] = 'Chat room added!'

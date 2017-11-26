@@ -8,7 +8,7 @@ class User < ApplicationRecord
  has_many :instamessages
  has_many :conversations, foreign_key: :sender_id
  has_one :event
- has_one :profile
+ has_one :profile, dependent: :destroy
  has_many :chat_rooms, dependent: :destroy
  has_many :messages, dependent: :destroy
  has_many :sports, through: :profile

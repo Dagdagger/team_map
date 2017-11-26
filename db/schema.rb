@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115025840) do
+ActiveRecord::Schema.define(version: 20171119142602) do
 
   create_table "chat_rooms", force: :cascade do |t|
     t.string   "title"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 20171115025840) do
     t.string   "firstname"
     t.string   "lastname"
     t.string   "username"
+    t.string   "email"
+    t.string   "image"
   end
 
   create_table "conversations", force: :cascade do |t|
@@ -63,6 +65,7 @@ ActiveRecord::Schema.define(version: 20171115025840) do
     t.integer  "need"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "user_id"
   end
 
   create_table "instamessages", force: :cascade do |t|
@@ -107,6 +110,7 @@ ActiveRecord::Schema.define(version: 20171115025840) do
     t.integer  "skill"
     t.text     "sportdescription"
     t.string   "user_id"
+    t.string   "image"
   end
 
   create_table "ratings", force: :cascade do |t|

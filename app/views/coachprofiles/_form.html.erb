@@ -1,11 +1,32 @@
 <%= form_for(@coachprofile, html: { class: "form-horizontal", role: "form" } ) do |f|%>
 
 <div class = "field">
+	<%= f.label :image, "Upload a Profile Picture" %><br>
+	<%= f.file_field :image %>
+</div>
+<br />
+
+<div class = "field">
 	<%= f.label :firstname, "Enter your first name" %> <br />
 	<%= f.text_field :firstname %>
 </div>
 
 <br />
+
+<div class = "field">
+	<%= f.label :email, "Enter your contact email" %> <br />
+	<%= f.text_field :email%>
+</div>
+
+<br />
+
+<div class = "field">
+	<%= f.label :address, "Enter an Address" %> <br />
+	<%= f.text_field :address %>
+</div>
+
+<br />
+
 
 <div class = "field">
 	<%=f.label :lastname, "Enter your last name"%><br />
@@ -23,7 +44,7 @@
 
 	<div class = "field">
 		<%= f.label :price, "Price you're charging for your services" %><br />
-		<%= f.text_field :price%>
+		<%= f.select :price, [5, 10, 15, 20, 25, 30, 35, 40, 45, 50], :prompt => 'Select One'%>
 	</div>
 
 	<br />

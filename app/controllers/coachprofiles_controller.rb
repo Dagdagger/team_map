@@ -2,11 +2,15 @@ class CoachprofilesController < ApplicationController
 
   def new
 		@coachprofile = current_coach.coachprofile
-	end
+  end
+
+  def index
+    @coachprofiles = Coachprofile.all
+  end
 
 	def show
 		@coachprofile = current_coach.coachprofile
-		if @coachprofile.description == nil
+		if @coachprofile.email == nil
 			redirect_to action: "new"
 		end
 	end
@@ -18,7 +22,7 @@ class CoachprofilesController < ApplicationController
 	end
 
 	def edit
-		@coachprofile = current_coach.profile
+		@coachprofile = current_coach.coachprofile
 	end
 
 	def create
@@ -37,6 +41,6 @@ class CoachprofilesController < ApplicationController
 	private
 
 	def coachprofile_params
-	params.require(:coachprofile).permit(:address, :description, :birthdate, :sport, :price, :firstname, :lastname, )
+	params.require(:coachprofile).permit(:phonenumber, :email, :image, :address, :description, :birthdate, :sport, :price, :firstname, :lastname)
 	end
 end

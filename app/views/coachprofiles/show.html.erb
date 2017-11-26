@@ -1,19 +1,42 @@
 <h1 style = "text-align-center"> This is a profile show action </h1>
 
-<h2> I was born on </h2>
+<p>
+  <strong> Profile Picture:</strong>
+  <%= image_tag @coachprofile.image.thumb.url %>
+</p>
+
+<p>
+<strong> I was born on: </strong>
 <%=  @coachprofile.birthdate %>
-<br>
+</p>
 
-<h2> A little something about me </h2>
+</p>
+<strong> A little something about me: </strong>
 <%=  @coachprofile.description %>
-<br>
+</p>
 
-<h2> You can find me at </h2>
+<p>
+<strong> You can find me at: </strong>
 <%=  @coachprofile.address %>
-<br>
-<h2> I play </h2>
+</p>
+
+<p>
+<strong> I teach: </strong>
 <%= @coachprofile.sport %>
 <br>
-<h2> My price is </h2>
-<%= @coachprofile.price %>
-<%= link_to "edit Profile", edit_profile_path %>
+</p>
+
+<p>
+<strong> My phone number is: </strong>
+ <%= number_to_phone(@coachprofile.phonenumber) %>
+</p>
+
+
+<p>
+<strong> My price is: $</strong>
+ <%= @coachprofile.price %>
+</p>
+
+<br>
+<br>
+<%= link_to "edit Profile", edit_coachprofile_path %>

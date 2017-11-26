@@ -1,0 +1,31 @@
+<h1>Listing Coaches</h1>
+</div>
+
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Coaching Price</th>
+          <th>Location</th>
+          <th>Phone Number</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= content_tag_for(:tr, @coachprofiles) do |coachprofile| %>
+          <td><%= coachprofile.firstname %></td>
+          <td><%= coachprofile.email %></td>
+          <td><%= coachprofile.price %></td>
+          <td><%= coachprofile.address %> </td>
+          <td><%= number_to_phone(coachprofile.phonenumber) %> </td>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<div style='width: 800px;'>
+<div id="map" style='width: 800px; height: 400px;'></div>
+</div>
+<style>body{padding-left:70px;}</style>
