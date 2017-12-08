@@ -1,48 +1,46 @@
 <%= form_for(@profile, html: { class: "form-horizontal", role: "form" } ) do |f|%>
-	<div class = "form-group">
-		<%= f.label :age %>
-		<div class= "col-sm-5">
-		<%= f.text_field :age, class: "form-control" %>
-	</div>
-	</div>
 
+<div class = "field">
+	<%= f.label :image, "Upload a Profile Picture" %><br>
+	<%= f.file_field :image %>
+</div>
+<br />
 
-	<div class = "form-group">
-		<%= f.label :address %>
-		<div class = "col-sm-5">
-		<%= f.text_field :address, class: "form-control" %>
+	<div class = "field">
+		<%= f.label :age, "Enter your age" %>
+		<%= f.text_field :age %>
 	</div>
-	</div>
+	<br />
 
-	<div class = "form-group">
-		<%= f.label :description, "Write something about yourself!" %>
-		<div class = "col-sm-20" %>
+	<div class = "field">
+		<%= f.label :description, "Write something about yourself!" %><br />
 		<%= f.text_area :description %>
-		</div>
 	</div>
-	<div class = "form-group">
-		<%= f.label :birthdate, "Birthdate" %>
-		<%= f.date_select :birthdate %>
-	</div>
-	<div class = "form-group">
-		<%= f.label :sport, "Main Sport" %>
-		<div class = "col-sm-20" %>
-		<%= f.text_field :sport, class: "form-control" %>
-		</div>
-	</div>
-	<div class = "form-group">
-		<%= f.label :sportdescription, "Write Something about your preferred Sport" %>
-		<div class = "col-sm-20" %>
-		<%= f.text_area :sportdescription, class: "form-control" %>
-		</div>
-		</div>
-		<div class = "form-group">
-			<%= f.label :skill, "What is your skill level in this sport?" %>
-			<div class = "col-sm-20" %>
-			<%= f.select :skill, (0..10), class: "form-control" %>
-			</div>
-		</div>
+	<br />
 
+	<div class = "field">
+		<%= f.label :birthdate, "Choose Birthdate" %> <br />
+		<%= f.date_select :birthdate, :start_year => 1930 %>
+	</div>
+	<br />
+
+	<div class = "field">
+		<%= f.label :sport, "Main Sport" %> <br />
+		<%= f.text_field :sport%>
+		</div>
+		<br />
+
+	<div class = "field">
+		<%= f.label :sportdescription, "Write Something about your preferred Sport" %><br />
+		<%= f.text_area :sportdescription %>
+		</div>
+		<br />
+
+		<div class = "field">
+			<%= f.label :skill, "What is your skill level in this sport?" %><br />
+			<%= f.select :skill, (0..10) %>
+			</div>
+		<br />
 
 	<div class="actions">
 		<%= f.submit 'Update!' %>

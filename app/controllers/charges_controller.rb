@@ -1,13 +1,10 @@
 
 class ChargesController < ApplicationController
 
-  before_action :set_description
-  before_action :authenticate_user!
   def new
+    @coachprofile = Coachprofile.find(params[:id])
+    @amount = @coachprofile.price * 100
   end
-
-
-
 
   def thanks
   end
@@ -15,7 +12,6 @@ class ChargesController < ApplicationController
   def create
     # Amount in cents
     @amount = 500
-
     customer = StripeTool.create_customer(email: params[:stripeEmail],
                                           stripe_token: params[:stripeToken]
     )
@@ -38,6 +34,6 @@ class ChargesController < ApplicationController
 
 
   def amount_to_be_charged
-  @amount = 500
+    @amount = 500
   end
 end

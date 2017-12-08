@@ -9,7 +9,8 @@ class EventsController < ApplicationController
 	@distance = params[:distance]
 	@events = Event.near(@location,@distance)
 		hello(@events)
-  else    @events = Event.all
+  else
+    @events = Event.all
     @hash = Gmaps4rails.build_markers(@events) do |event, marker|
     marker.lat event.latitude
     marker.lng event.longitude

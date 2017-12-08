@@ -1,5 +1,6 @@
 class CoachprofilesController < ApplicationController
 
+
   def new
 		@coachprofile = current_coach.coachprofile
   end
@@ -8,12 +9,14 @@ class CoachprofilesController < ApplicationController
     @coachprofiles = Coachprofile.all
   end
 
+
 	def show
 		@coachprofile = current_coach.coachprofile
-		if @coachprofile.email == nil
+		if @coachprofile.price == nil
 			redirect_to action: "new"
 		end
 	end
+
 
 	def update
 		if current_coach.coachprofile.update_attributes(coachprofile_params)
@@ -39,6 +42,7 @@ class CoachprofilesController < ApplicationController
 
 
 	private
+
 
 	def coachprofile_params
 	params.require(:coachprofile).permit(:phonenumber, :email, :image, :address, :description, :birthdate, :sport, :price, :firstname, :lastname)

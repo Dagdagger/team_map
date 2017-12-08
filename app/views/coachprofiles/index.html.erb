@@ -10,6 +10,7 @@
           <th>Coaching Price</th>
           <th>Location</th>
           <th>Phone Number</th>
+          <th> Hire?  </th>
 
     </tr>
   </thead>
@@ -21,6 +22,7 @@
           <td><%= coachprofile.price %></td>
           <td><%= coachprofile.address %> </td>
           <td><%= number_to_phone(coachprofile.phonenumber) %> </td>
+          <td> <%= link_to "Hire", {:controller => "charges", :action => "new", :id => coachprofile.id } %> </td>
     <% end %>
   </tbody>
 </table>
