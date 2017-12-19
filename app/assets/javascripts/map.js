@@ -26,7 +26,7 @@
 
     map.bounds.extendWith(__markers);
     map.fitMapToBounds();
-  };
+  }
 
   // "Publish" our method on window. You should probably have your own namespace
   window.updateMarkers = updateMarkers;

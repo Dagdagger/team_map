@@ -6,7 +6,7 @@ class ProfilesController < ApplicationController
 
 	def show
 		@profile = current_user.profile
-		if @profile.age == nil
+		if @profile.displayname == nil
 			redirect_to action: "new"
 		end
 	end
@@ -37,6 +37,6 @@ class ProfilesController < ApplicationController
 	private
 
 	def profile_params
-	params.require(:profile).permit(:image, :age, :address, :description, :birthdate, :sport, :sportdescription, :skill)
+	params.require(:profile).permit(:image,:displayname, :age, :address, :description, :birthdate, :sport, :sportdescription, :skill)
 	end
 end

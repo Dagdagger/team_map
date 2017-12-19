@@ -11,6 +11,7 @@
 			<span>Amount: <%= pretty_amount(@amount) %></span>
 		</label>
 	</article>
+	 <%= hidden_field_tag 'amount', @amount %>
 
 	<script src="https://checkout.stripe.com/checkout.js" class = "stripe-button"
     data-key="<%= Rails.configuration.stripe[:publishable_key] %>"

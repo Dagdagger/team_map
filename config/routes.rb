@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
 mount ActionCable.server => '/cable'
 root 'home#index'
-devise_for :users
+devise_for :users, :controllers => { registrations: 'registrations' }
 devise_for :coaches, path: 'coaches', controllers:
 {sessions: "coaches/sessions"}
 
@@ -26,6 +26,7 @@ authenticated :user do
   get 'profiles/:id' => 'profiles#show'
   get 'profiles/:id/new' => 'profiles#new'
   get 'coachprofiles/index' => 'coachprofiles#index'
+  get 'events/:id/join' => 'events#join'
   resources :events
   resources :users
   resources :profiles

@@ -26,7 +26,7 @@
             <td><%= event.address %></td>
             <td><%= event.sport %></td>
 	    <td><%= event.need %></td>
-            <td><%= link_to "Join", event, data: {confirm: 'Are you sure?' } %></td>
+            <td><%= link_to "Join", {:controller => "events", :action => "join", :id => event.id } %> </td>
             <td><%= link_to 'Edit', edit_event_path(event) %></td>
             <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
@@ -41,7 +41,7 @@
 <script type="text/javascript">
 handler = Gmaps.build('Google');
 handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
- markers = handler.addMarkers(<%=raw @hash.to_json %>);
+ markers = handler.addMarkers(<%=raw @hash.to_json %> );
   handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
 });

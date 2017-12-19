@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :join]
 
   # GET /events
   # GET /events.json
@@ -14,7 +14,7 @@ class EventsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@events) do |event, marker|
     marker.lat event.latitude
     marker.lng event.longitude
-    marker.infowindow event.sport
+    marker.infowindow "Created by #{event.name} \nNeeds: #{event.need}"
 	end
      end
   end
@@ -22,12 +22,13 @@ class EventsController < ApplicationController
   # GET /event/1
   # GET /events/1.json
   def show
-
-	if @event.need != 0
-	@event.update_attribute(:need, @event.need - 1)
-	end
   end
 
+  def join
+    if @event.need != 0
+  	@event.update_attribute(:need, @event.need - 1)
+    end
+  end
 
   def search
 
@@ -58,7 +59,7 @@ end
   # POST events/
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    @event = Event.new(event_params.merge(name: current_user.profile.displayname))
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -89,7 +90,7 @@ end
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -102,6 +103,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :address, :sport, :need)
+      params.require(:event).permit(:address, :sport, :need).merge(name: current_user.profile.displayname)
     end
 end

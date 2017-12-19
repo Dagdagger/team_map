@@ -1,17 +1,16 @@
-
 class ChargesController < ApplicationController
+
 
   def new
     @coachprofile = Coachprofile.find(params[:id])
     @amount = @coachprofile.price * 100
   end
 
-  def thanks
-  end
 
   def create
     # Amount in cents
-    @amount = 500
+    @amount = params[:amount]
+
     customer = StripeTool.create_customer(email: params[:stripeEmail],
                                           stripe_token: params[:stripeToken]
     )
@@ -20,20 +19,20 @@ class ChargesController < ApplicationController
                                       amount: @amount,
                                       description: @description
     )
-    redirect_to thanks_path
+    redirect_to controller: 'charges', action: 'thanks', amount: @amount
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to new_charge_path
   end
 
+  def thanks
+    @amount = params[:amount]
+    @amount = @amount.to_i
+  end
+
   private
   def description
     @description = "Some amazing Training"
-  end
-
-
-  def amount_to_be_charged
-    @amount = 500
   end
 end

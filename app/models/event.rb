@@ -1,7 +1,5 @@
 class Event < ApplicationRecord
 
-	#belongs_to :User
-
 	def self.search(search)
 			if search
 						find(:all, :conditions => ['name LIKE ?', "%#(search)%"])
@@ -10,7 +8,7 @@ class Event < ApplicationRecord
 			end
 	end
 
-	belongs_to :user, optional: true 
+	belongs_to :user
 	geocoded_by :address
 	after_validation :geocode, if: -> (obj){ obj.address.present? and obj.address_changed? }
 
