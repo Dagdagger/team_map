@@ -2,9 +2,11 @@
 @import "bootstrap-sprockets.scss";
 @import "global.scss";
 @import "bootstrap.scss";
+@import 'bootstrap-datetimepicker';
+@import "variables.css.scss";
 
 body {
-  padding-top: $navbar-height + 50px;
+  padding-top: 100px;
 }
 
 .page-header {

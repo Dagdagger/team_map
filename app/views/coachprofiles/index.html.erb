@@ -1,33 +1,19 @@
-<h1>Listing Coaches</h1>
-</div>
+<h4>Available Coaches</h4>
 
-<div class="table-responsive">
-<table class="table table-striped table-bordered table-hover">
-  <thead>
-    <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Coaching Price</th>
-          <th>Location</th>
-          <th>Phone Number</th>
-          <th> Hire?  </th>
-
-    </tr>
-  </thead>
-
-  <tbody>
-    <%= content_tag_for(:tr, @coachprofiles) do |coachprofile| %>
-          <td><%= coachprofile.firstname %></td>
-          <td><%= coachprofile.email %></td>
-          <td><%= coachprofile.price %></td>
-          <td><%= coachprofile.address %> </td>
-          <td><%= number_to_phone(coachprofile.phonenumber) %> </td>
-          <td> <%= link_to "Hire", {:controller => "charges", :action => "new", :id => coachprofile.id } %> </td>
+    <% @coachprofiles.each do |coachprofile| %>
+    <div class="small-2" style = "border: 3px solid #466d98; padding: 10px">
+  <ul style = "list-style-type:none">
+      <li class="large-3" style = "margin: 10px">
+          <%= link_to({:controller => "coachprofiles", :action => "publicshow", :id => coachprofile.id}) do %>
+            <%= image_tag coachprofile.image, size: "100x100"  %>
+          <% end %>
+            <div class="title">
+              <h6><%= coachprofile.firstname %> <span> Teaches: <%= coachprofile.sport %> </span></h6>
+            </div>
+            <p>$ <%= coachprofile.price %></p>
+            <p><%= link_to "Hire as Coach", {:controller => "charges", :action => "new", :id => coachprofile.id }  %> </p>
+            <p><%= link_to "Hire as Referee", {:controller => "charges", :action => "new", :id => coachprofile.id } %></p>
+            </li>
+          </ul>
+          </div>
     <% end %>
-  </tbody>
-</table>
-</div>
-<div style='width: 800px;'>
-<div id="map" style='width: 800px; height: 400px;'></div>
-</div>
-<style>body{padding-left:70px;}</style>

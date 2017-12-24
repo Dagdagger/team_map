@@ -8,8 +8,16 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'public_activity'
+gem 'will_paginate', '~> 3.1.0'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
+gem 'acts_as_votable'
+# Use postgres as the database for Active Record
+gem 'pg'
+gem 'foundation-rails'
+gem 'acts_as_follower', github: 'tcocca/acts_as_follower', branch: 'master'
+gem 'groupify'
 gem 'faye'
 gem 'record_tag_helper'
 gem 'dotenv-rails', :groups => [:development, :test]
@@ -26,6 +34,7 @@ gem 'stripe'
 gem 'bootstrap-generators'
 gem 'geocoder'
 gem 'devise'
+gem 'jquery-turbolinks'
 gem "gritter", "1.2.0"
 gem "twilio-ruby"
 gem 'carrierwave', '~> 0.10.0'

@@ -1,0 +1,18 @@
+<h1 style = "text-align-center"> <%= @coachprofile.firstname %>'s coachprofile </h1>
+
+<div class="col-lg-3" style = "text-align-center">
+  <div id="user-info" class="well">
+  <h5> Age: <%= age(@coachprofile.birthdate) %>  </h5>
+  <h5> Sport Taught: <%= @coachprofile.sport %> </h5>
+<h5>  <%= link_to like_coachprofile_path(@coachprofile), method: :put do %>
+  Rate Up!
+    <%= @coachprofile.get_upvotes.size %>
+  <% end %>
+</h5>
+  <h5><%= link_to dislike_coachprofile_path(@coachprofile), method: :put do %>
+    Rate Down!
+    <%= @coachprofile.get_downvotes.size %>
+  <% end %>
+</h5>
+    </div>
+  </div>

@@ -8,8 +8,6 @@ class CoachesController < ApplicationController
   private
 
   def user_params
-
   	params.require(:user).permit(:username, :firstname, :lastname, :gender, :email, :password)
-
   end
 end

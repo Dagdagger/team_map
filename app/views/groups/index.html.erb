@@ -1,0 +1,38 @@
+<%= link_to new_group_path, class: 'btn btn-primary' do %>
+  <span class="glyphicon glyphicon-plus"></span>
+  New group
+<% end %>
+<h1>Listing groups</h1>
+</div>
+
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+          <th>Group Name</th>
+          <th>Group Sport</th>
+          <th>Located in: </th>
+          <th> Join Group </th>
+          <th>See Group</th>
+      <th>Edit Group</th>
+      <th>Delete Group</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= content_tag_for(:tr, @group) do |group| %>
+          <td><%= group.name%></td>
+          <td><%= group.sport %></td>
+          <td><%= group.location %></td>
+          <td><%= link_to 'Show', group %></td>
+          <% if current_user.in_all_groups?(group, as: 'Captain') %>
+      <td><%= link_to 'Edit', edit_group_path(group) %></td>
+      <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <%  end %>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<style>body{padding-left:70px;
+            padding-right:70px;}</style>

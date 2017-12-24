@@ -4,7 +4,15 @@ class ProfilesController < ApplicationController
 		@profile = current_user.profile
 	end
 
+
+
+	def publicshow
+		@profile = Profile.find(params[:id])
+	end
+
+
 	def show
+		@activities = PublicActivity::Activity.where(owner: current_user).paginate(page: params[:page],per_page: 10)
 		@profile = current_user.profile
 		if @profile.displayname == nil
 			redirect_to action: "new"
@@ -32,6 +40,20 @@ class ProfilesController < ApplicationController
 		end
 		end
 	end
+
+
+	def upvote
+  @profile = Profile.find(params[:id])
+  @profile.upvote_by current_user
+  redirect_to :back
+end
+
+def downvote
+  @profile = Profile.find(params[:id])
+  @profile.downvote_by current_user
+  redirect_to :back
+end
+
 
 
 	private

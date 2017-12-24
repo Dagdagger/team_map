@@ -1,42 +1,30 @@
-<h1 style = "text-align-center"> This is a profile show action </h1>
+<div class="row">
+<div class="col-lg-3">
+  <div id="user-info" class="well">
 
-<p>
-  <strong> Profile Picture:</strong>
-  <%= image_tag @coachprofile.image.thumb.url %>
-</p>
-
-<p>
-<strong> I was born on: </strong>
-<%=  @coachprofile.birthdate %>
-</p>
-
-</p>
-<strong> A little something about me: </strong>
-<%=  @coachprofile.description %>
-</p>
-
-<p>
-<strong> You can find me at: </strong>
-<%=  @coachprofile.address %>
-</p>
-
-<p>
-<strong> I teach: </strong>
-<%= @coachprofile.sport %>
-<br>
-</p>
-
-<p>
-<strong> My phone number is: </strong>
- <%= number_to_phone(@coachprofile.phonenumber) %>
-</p>
+<h5> Age: <%= age(@coachprofile.birthdate) %>  </h5>
+  <h5>  Sport taught: <%= @coachprofile.sport %> </h5>
+    <h5> Phone Number: <%= number_to_phone(@coachprofile.phonenumber, area_code: true) %>
+      <h5> Price: <%= @coachprofile.price %> </h5>
+      <h5> Rating: <%= @coachprofile.rating %> </h5>
+    </div>
+  </div>
 
 
-<p>
-<strong> My price is: $</strong>
- <%= @coachprofile.price %>
-</p>
 
-<br>
-<br>
-<%= link_to "edit Profile", edit_coachprofile_path %>
+<div class="col-lg-6">
+</div>
+
+
+
+<div class="col-lg-3">
+     <% if @coachprofile.coach == current_coach%>
+       <div class="well">
+         <ul class="nav nav-pills nav-stacked">
+           <li><%= link_to 'Edit Profile', edit_profile_path(current_user) %></li>
+           <li><%= link_to 'Change password', edit_user_registration_path %></li>
+         </ul>
+       </div>
+     <% end %>
+   </div>
+  </div>

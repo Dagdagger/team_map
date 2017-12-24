@@ -1,22 +1,36 @@
-<h1 style = "text-align-center"> This is a profile show action </h1>
+<h5 style = "text-align-center"> <%= @profile.displayname %>'s Profile </h5>
 
-<h2> My age is </h2>
-<%=  @profile.age %>
-<br>
+<div class="row">
+<div class="col-lg-3">
+  <div id="user-info" class="well">
+  <h5> Age: <%= age(@profile.birthdate) %>  </h5>
+  <h5>  Main Sport: <%= @profile.sport %> </h5>
+  <h5> Perceived sport level: <%= @profile.skill %> </h5>
+    </div>
+  </div>
 
-<h2> A little something about me </h2>
-<%=  @profile.description %>
-<br>
+  <div class="col-lg-6">
+      <div id="activity">
+        <h2 style = "text-align-center"> Your Activity </h2>
+        <% if @activities.empty? %>
+          <div class="well">
+            <%= render('shared/no_resource', resources: 'Activities') %>
+          </div>
+        <% else %>
+        <%= render_activities(@activities, layout: '/shared/activity') %>
+        <% end %>
+      </div>
+      <%= render 'shared/paginate', resources: @activities %>
+    </div>
 
-<h2> You can find me at </h2>
-<%=  @profile.address %>
-<br>
-<h2> I play </h2>
-<%= @profile.sport %>
-<br>
-<h2> Here is a little about it </h2>
-<%= @profile.sportdescription %>
-<br>
-<h2> My skill level is : <%= @profile.skill %> </h2>
-<br>
-<%= link_to "edit Profile", edit_profile_path %>
+<div class="col-lg-3">
+   <% if @profile.user == current_user %>
+     <div class="well">
+       <ul class="nav nav-pills nav-stacked">
+         <li><%= link_to 'Edit Profile', edit_profile_path(current_user) %></li>
+         <li><%= link_to 'Change password', edit_user_registration_path %></li>
+       </ul>
+     </div>
+   <% end %>
+ </div>
+</div>

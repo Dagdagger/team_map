@@ -1,5 +1,4 @@
 class ChatRoom < ApplicationRecord
-  belongs_to :user
-  belongs_to :coach
+  belongs_to :user 
   has_many :messages, dependent: :destroy
 end

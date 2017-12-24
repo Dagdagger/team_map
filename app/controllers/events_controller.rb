@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :join]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :join, :attendees]
 
   # GET /events
   # GET /events.json
@@ -8,14 +8,13 @@ class EventsController < ApplicationController
 	@location = params[:location]
 	@distance = params[:distance]
 	@events = Event.near(@location,@distance)
-		hello(@events)
   else
     @events = Event.all
+  end
     @hash = Gmaps4rails.build_markers(@events) do |event, marker|
     marker.lat event.latitude
     marker.lng event.longitude
     marker.infowindow "Created by #{event.name} \nNeeds: #{event.need}"
-	end
      end
   end
 
@@ -25,43 +24,50 @@ class EventsController < ApplicationController
   end
 
   def join
+    @token = params[:invite_token]
+    if @event.attendance.users.include?(current_user)
+      redirect_to events_url, alert:  "Sorry you already joined this event"
+    end
+
+    if @event.need <= 0
+      redirect_to events_url, alert:  "Sorry theres already enough people for this event"
+    end
+
     if @event.need != 0
   	@event.update_attribute(:need, @event.need - 1)
     end
+    @event.attendance.users << current_user
+    @attendees = @event.attendance.users.all
   end
 
-  def search
-
+  def attendees
+    @attendees = @event.attendance.users.all
   end
-
-def hello(events)
-
-	@events = events
-	@hash = Gmaps4rails.build_markers(@events) do |event, marker|
-		marker.lat event.latitude
-		marker.lng event.longitude
-		marker.infowindow event.sport
-		marker.json({title: event.name, id:event.id})
-	end
-end
-
 
 
   # GET /events/new
   def new
+    if current_user.profile.displayname == nil
+       redirect_to profile_path(current_user), alert: 'Please Create a Profile first.'
+    end
     @event = Event.new
   end
 
+
   # GET /events/1/edit
   def edit
+    if current_user.id != @event.user_id
+      redirect_to events_url, alert: "Please don't try to change other peoples events."
+    end
   end
 
   # POST events/
   # POST /events.json
   def create
-    @event = Event.new(event_params.merge(name: current_user.profile.displayname))
+    @event = Event.new(event_params.merge(name: current_user.profile.displayname, user_id: current_user.id))
     respond_to do |format|
       if @event.save
+        @event.attendance.users << current_user
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -101,8 +107,9 @@ end
       @event = Event.find(params[:id])
     end
 
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:address, :sport, :need).merge(name: current_user.profile.displayname)
+      params.require(:event).permit(:address, :sport, :need, :time).merge(name: current_user.profile.displayname)
     end
 end

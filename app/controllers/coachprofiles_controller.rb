@@ -17,6 +17,10 @@ class CoachprofilesController < ApplicationController
 		end
 	end
 
+  def publicshow
+    @coachprofile = Coachprofile.find(params[:id])
+  end
+
 
 	def update
 		if current_coach.coachprofile.update_attributes(coachprofile_params)
@@ -39,6 +43,19 @@ class CoachprofilesController < ApplicationController
 		end
 		end
 	end
+
+
+  def upvote
+  @coachprofile= Coachprofile.find(params[:id])
+  @coachprofile.upvote_by current_user
+  redirect_to :back
+end
+
+def downvote
+  @coachprofile = Coachprofile.find(params[:id])
+  @coachprofile.downvote_by current_user
+  redirect_to :back
+end
 
 
 	private

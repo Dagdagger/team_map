@@ -17,10 +17,12 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 <%= csrf_meta_tags %>
 </head>
+
+
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style=>
     <div class="container">
-      <div class="navbar-header">
+      <div class="navbar-header" >
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
@@ -28,10 +30,10 @@
           <span class="icon-bar"></span>
         </button>
 	<% if !current_user %>
-        <%= link_to "Team Map", root_url, class: "navbar-brand" %>
+        <%= link_to "Team Map", root_url, class: "navbar-brand", 'data-no-turbolink' => true  %>
 	<% end %>
-	<%if current_user %>
-	<%= link_to "Team Map", events_url, class: "navbar-brand" %>
+	<% if current_user %>
+	<%= link_to "Team Map", events_url, class: "navbar-brand", 'data-no-turbolink' => true   %>
 	<% end %>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
@@ -55,11 +57,11 @@
 	<li>
 		<%= link_to "Create Event", new_event_path %>
 	</li>
+  <li>
+    <%= link_to "Groups", groups_path %>
+  </li>
 	<li>
-		<%= link_to "Search for Nearby Events", events_search_url %>
-	</li>
-	<li>
-		<%= link_to "Profile", profile_path(current_user) %>
+		<%= link_to "My Profile", profile_path(current_user) %>
 	</li>
 	<li>
 		<%= link_to "Edit Account", edit_user_registration_path %>
@@ -70,7 +72,6 @@
 	<li>
 		<%= link_to "Chat Rooms", chat_rooms_url %>
 	</li>
-
 		<li>
 		<%= link_to "Logout", destroy_user_session_path, method: :delete %>
 		</li>
@@ -92,6 +93,13 @@
       </div>
     </div>
   </nav>
+
+
+  </body>
+</html>
+
+  <hr style="margin-top: 100px; margin-bottom: 50px; visibility: hidden;">
+
   <div class="container">
     <% flash.each do |name, msg| %>
       <%= content_tag :div, class: "alert alert-#{ name == :error ? "danger" : "success" } alert-dismissable", role: "alert" do %>

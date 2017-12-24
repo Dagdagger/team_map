@@ -19,14 +19,29 @@ end
 
 authenticated :user do
   resources :charges
+  resources :invites
   get 'thanks', to: 'charges#thanks', as: 'thanks'
   resources :chat_rooms, only: [:new, :create, :show, :index]
-  get 'events/search' => 'events#search'
-  get 'events/hello'  => 'events#hello'
+  resources :groups
+  get 'seecoachprofiles/:id' => 'coachprofiles#publicshow'
+  get 'coachprofiles/index' => 'coachprofiles#index'
+  resources :coachprofiles do
+  member do
+    put "like", to: "coachprofiles#upvote"
+    put "dislike", to: "coachprofiles#downvote"
+  end
+end
+  get 'seeprofiles/:id' => 'profiles#publicshow'
   get 'profiles/:id' => 'profiles#show'
   get 'profiles/:id/new' => 'profiles#new'
-  get 'coachprofiles/index' => 'coachprofiles#index'
-  get 'events/:id/join' => 'events#join'
+  resources :profiles do
+  member do
+    put "like", to: "profiles#upvote"
+    put "dislike", to: "profiles#downvote"
+  end
+end
+  get 'events/:id/join' => 'events#join', as: 'join'
+  get 'events/:id/attendees' =>  'events#attendees'
   resources :events
   resources :users
   resources :profiles

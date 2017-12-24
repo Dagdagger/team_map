@@ -1,0 +1,71 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
+.activity {
+  background: white;
+  border: 1px solid #2BDB60;
+  border-radius: 3px;
+  padding: 10px;
+  margin: 10px;
+}
+$border-color: #e0e0e0;
+$liked-color: #2a6496;
+
+.btn {
+  font-family: 'Montserrat', sans-serif;
+  padding: 10px 20px;
+}
+
+
+.btn-sm {
+  padding: 7px 15px;
+  border: none;
+}
+
+.activity-event,
+.activity-post,
+.event,
+.post {
+  .actions {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid $border-color;
+
+    a,
+    button {
+      font-family: 'Montserrat', sans-serif;
+      background-color: $border-color;
+      color: #555;
+
+      i {
+        margin-right: 5px;
+      }
+    }
+  }
+}
+#links,
+#user-info {
+  h5 {
+    border-bottom: 1px solid $border-color;
+    padding: 15px 10px;
+    margin: 0;
+  }
+
+  i {
+    font-size: 1.75rem;
+    margin-right: 20px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+.liked {
+  color: $liked-color !important;
+}

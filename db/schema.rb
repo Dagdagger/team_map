@@ -10,7 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171219001907) do
+ActiveRecord::Schema.define(version: 20171224055532) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string   "trackable_type"
+    t.integer  "trackable_id"
+    t.string   "owner_type"
+    t.integer  "owner_id"
+    t.string   "key"
+    t.text     "parameters"
+    t.string   "recipient_type"
+    t.integer  "recipient_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
+    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
+    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
+  end
+
+  create_table "attendances", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "event_id"
+  end
 
   create_table "charges", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -22,9 +47,9 @@ ActiveRecord::Schema.define(version: 20171219001907) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.         "references"
+    t.string   "references"
     t.string   "coach_id"
-    t.index ["user_id"], name: "index_chat_rooms_on_user_id"
+    t.index ["user_id"], name: "index_chat_rooms_on_user_id", using: :btree
   end
 
   create_table "coaches", force: :cascade do |t|
@@ -56,9 +81,9 @@ ActiveRecord::Schema.define(version: 20171219001907) do
     t.integer  "sender_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true
-    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
-    t.index ["sender_id"], name: "index_conversations_on_sender_id"
+    t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true, using: :btree
+    t.index ["recipient_id"], name: "index_conversations_on_recipient_id", using: :btree
+    t.index ["sender_id"], name: "index_conversations_on_sender_id", using: :btree
   end
 
   create_table "events", force: :cascade do |t|
@@ -68,9 +93,47 @@ ActiveRecord::Schema.define(version: 20171219001907) do
     t.string   "address"
     t.string   "sport"
     t.integer  "need"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "user_id"
+    t.integer  "attendance_id"
+    t.string   "time"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.string   "followable_type",                 null: false
+    t.integer  "followable_id",                   null: false
+    t.string   "follower_type",                   null: false
+    t.integer  "follower_id",                     null: false
+    t.boolean  "blocked",         default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["followable_id", "followable_type"], name: "fk_followables", using: :btree
+    t.index ["follower_id", "follower_type"], name: "fk_follows", using: :btree
+  end
+
+  create_table "group_memberships", force: :cascade do |t|
+    t.string   "member_type",     null: false
+    t.integer  "member_id",       null: false
+    t.string   "group_type"
+    t.integer  "group_id"
+    t.string   "group_name"
+    t.string   "membership_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["group_name"], name: "index_group_memberships_on_group_name", using: :btree
+    t.index ["group_type", "group_id"], name: "index_group_memberships_on_group_type_and_group_id", using: :btree
+    t.index ["member_type", "member_id"], name: "index_group_memberships_on_member_type_and_member_id", using: :btree
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "descriptions"
+    t.string   "sport"
+    t.string   "name"
+    t.string   "location"
   end
 
   create_table "instamessages", force: :cascade do |t|
@@ -79,8 +142,19 @@ ActiveRecord::Schema.define(version: 20171219001907) do
     t.integer  "conversation_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.index ["conversation_id"], name: "index_instamessages_on_conversation_id"
-    t.index ["user_id"], name: "index_instamessages_on_user_id"
+    t.index ["conversation_id"], name: "index_instamessages_on_conversation_id", using: :btree
+    t.index ["user_id"], name: "index_instamessages_on_user_id", using: :btree
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.string   "email"
+    t.integer  "event_id"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.string   "token"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "username"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -89,10 +163,10 @@ ActiveRecord::Schema.define(version: 20171219001907) do
     t.integer  "chat_room_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.         "references"
+    t.string   "references"
     t.string   "coach_id"
-    t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
+    t.index ["chat_room_id"], name: "index_messages_on_chat_room_id", using: :btree
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
   create_table "posts", force: :cascade do |t|
@@ -101,7 +175,7 @@ ActiveRecord::Schema.define(version: 20171219001907) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_posts_on_user_id"
+    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -118,6 +192,8 @@ ActiveRecord::Schema.define(version: 20171219001907) do
     t.string   "image"
     t.string   "displayname"
     t.string   "string"
+    t.string   "phonenumber"
+    t.integer  "rating"
   end
 
   create_table "ratings", force: :cascade do |t|
@@ -144,9 +220,28 @@ ActiveRecord::Schema.define(version: 20171219001907) do
     t.string   "gender"
     t.string   "preferredsport"
     t.string   "firstname"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["username"], name: "index_users_on_username", unique: true
+    t.integer  "event_id"
+    t.string   "createdevents"
+    t.string   "integer"
+    t.integer  "attendance_id"
+    t.string   "name"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.string   "votable_type"
+    t.integer  "votable_id"
+    t.string   "voter_type"
+    t.integer  "voter_id"
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.integer  "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
   end
 
 end
