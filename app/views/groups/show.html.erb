@@ -3,36 +3,42 @@
     <span class="glyphicon glyphicon-list-alt"></span>
     See groups
   <% end %>
+  <% if current_user.in_all_groups?(@group, as: 'Captain') %>
   <%= link_to edit_group_path(@group), class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-pencil"></span>
     Edit
   <% end %>
-  <h1>Group Created</h1>
+  <% end %>
+  <h1><%= @group.name %></h1>
 </div>
 
 
 <div class="col-md-3">
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h3 class="panel-title">member list</h3>
+      <h3 class="panel-title">Member list</h3>
     </div>
     <div class="panel-body">
       <ul>
         <% @members.each do |member| %>
-          <li><%= member.email %></li>
+          <li><%= member.email %> </li>
         <% end %>
       </ul>
     </div>
   </div>
 </div>
 
-
-
 <div class="col-md-3">
-
-  Name: <%= @group.name %>
-  <br>
-  Location: <%= @group.location%>
-  <br>
-  This Group Plays: <%= @group.sport %>
-<div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title"> Group Information</h3>
+    </div>
+    <div class="panel-body">
+      <ul>
+        <li>Name: <%= @group.name %></li>
+          <li>Location: <%= @group.location %></li>
+            <li>Sport: <%= @group.sport %></li>
+      </ul>
+    </div>
+  </div>
+</div>

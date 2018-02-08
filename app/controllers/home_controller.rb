@@ -6,4 +6,7 @@ class HomeController < ApplicationController
     @conversations = Conversation.includes(:recipient, :instamessages)
                                  .find(session[:conversations])
   end
+
+  def conditions
+  end
 end

@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
+ validates_acceptance_of :terms
  after_create :create_profile
  has_many :instamessages
  has_many :conversations, foreign_key: :sender_id

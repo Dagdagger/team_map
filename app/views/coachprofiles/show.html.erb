@@ -1,18 +1,22 @@
+<h5 style = "text-align-center"> <%= @coachprofile.firstname %> <%= @coachprofile.lastname %>'s Profile </h5>
+
 <div class="row">
 <div class="col-lg-3">
   <div id="user-info" class="well">
+
 
 <h5> Age: <%= age(@coachprofile.birthdate) %>  </h5>
   <h5>  Sport taught: <%= @coachprofile.sport %> </h5>
     <h5> Phone Number: <%= number_to_phone(@coachprofile.phonenumber, area_code: true) %>
       <h5> Price: <%= @coachprofile.price %> </h5>
-      <h5> Rating: <%= @coachprofile.rating %> </h5>
+      <h5> Description: <%= @coachprofile.description %> </h5>
     </div>
   </div>
 
 
 
 <div class="col-lg-6">
+  <h5>       This is the profile people will see when hiring you! </h5>
 </div>
 
 
@@ -21,8 +25,8 @@
      <% if @coachprofile.coach == current_coach%>
        <div class="well">
          <ul class="nav nav-pills nav-stacked">
-           <li><%= link_to 'Edit Profile', edit_profile_path(current_user) %></li>
-           <li><%= link_to 'Change password', edit_user_registration_path %></li>
+           <li><%= link_to 'Edit Profile', edit_coachprofile_path(current_coach) %></li>
+           <li><%= link_to 'Change password', edit_coach_registration_path %></li>
          </ul>
        </div>
      <% end %>

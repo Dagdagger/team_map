@@ -1,14 +1,15 @@
 <h4>Available Coaches</h4>
 
     <% @coachprofiles.each do |coachprofile| %>
-    <div class="small-2" style = "border: 3px solid #466d98; padding: 10px">
+    <div class="row">
+    <div class="col-sm-6 col-md-3" style = "border: 3px solid #466d98; padding: 10px">
   <ul style = "list-style-type:none">
       <li class="large-3" style = "margin: 10px">
           <%= link_to({:controller => "coachprofiles", :action => "publicshow", :id => coachprofile.id}) do %>
             <%= image_tag coachprofile.image, size: "100x100"  %>
           <% end %>
             <div class="title">
-              <h6><%= coachprofile.firstname %> <span> Teaches: <%= coachprofile.sport %> </span></h6>
+              <h6><%= coachprofile.firstname %> <span> teaches: <%= coachprofile.sport %> </span></h6>
             </div>
             <p>$ <%= coachprofile.price %></p>
             <p><%= link_to "Hire as Coach", {:controller => "charges", :action => "new", :id => coachprofile.id }  %> </p>
@@ -16,4 +17,5 @@
             </li>
           </ul>
           </div>
+        </div>
     <% end %>

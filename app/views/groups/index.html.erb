@@ -24,11 +24,13 @@
           <td><%= group.name%></td>
           <td><%= group.sport %></td>
           <td><%= group.location %></td>
-          <td><%= link_to 'Show', group %></td>
+          <% if !current_user.in_all_groups?(group, as: 'Captain') %>
+          <td><%= link_to 'Join', groupjoin_url(group) %></td>
+          <% end %>
           <% if current_user.in_all_groups?(group, as: 'Captain') %>
       <td><%= link_to 'Edit', edit_group_path(group) %></td>
       <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <%  end %>
+    <% end %>
     <% end %>
   </tbody>
 </table>

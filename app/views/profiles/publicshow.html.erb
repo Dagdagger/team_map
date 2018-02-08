@@ -1,16 +1,27 @@
 <h1 style = "text-align-center"> <%= @profile.displayname %>'s Profile </h1>
-
+<div class = "row" >
 <div class="col-lg-3">
   <div id="user-info" class="well">
   <h5> Age: <%= age(@profile.birthdate) %>  </h5>
   <h5>  Main Sport: <%= @profile.sport %> </h5>
   <h5> Perceived Main Sport level: <%= @profile.skill %> </h5>
-  <h5>  <%= link_to like_coachprofile_path(@profile), method: :put do %>
+  <% if @profile.user.followed_by?(current_user) %>
+  <h5>  <%= link_to unfollow_profile_path(@profile), method: :put do %>
+    Unfollow!
+    <% end %>
+  </h5>
+  <% else %>
+    <h5><%= link_to follow_profile_path(@profile), method: :put do %>
+      Follow!
+    <% end %>
+    <% end %>
+  </h5>
+  <h5>  <%= link_to like_profile_path(@profile), method: :put do %>
     Rate Up!
       <%= @profile.get_upvotes.size %>
     <% end %>
   </h5>
-    <h5><%= link_to dislike_coachprofile_path(@profile), method: :put do %>
+    <h5><%= link_to dislike_profile_path(@profile), method: :put do %>
       Rate Down!
       <%= @profile.get_downvotes.size %>
     <% end %>
@@ -18,3 +29,20 @@
   <div class="text-center">
     </div>
   </div>
+</div>
+
+
+<div class="col-lg-6">
+    <div id="activity">
+      <h2 style = "text-align-center">  Activities </h2>
+      <% if @activities.empty? %>
+        <div class="well">
+          <%= render('shared/no_resource', resources: 'Activities') %>
+        </div>
+      <% else %>
+      <%= render_activities(@activities, layout: '/shared/activity') %>
+      <% end %>
+    </div>
+    <%= render 'shared/paginate', resources: @activities %>
+  </div>
+</div>

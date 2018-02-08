@@ -1,17 +1,18 @@
-<h5 style = "text-align-center"> <%= @profile.displayname %>'s Profile </h5>
+<h5 style = "text-align-center"> <%= @profile.displayname %>'s Profile <%= image_tag @profile.image, size: "50x50" %>  </h5>
 
 <div class="row">
 <div class="col-lg-3">
   <div id="user-info" class="well">
   <h5> Age: <%= age(@profile.birthdate) %>  </h5>
-  <h5>  Main Sport: <%= @profile.sport %> </h5>
-  <h5> Perceived sport level: <%= @profile.skill %> </h5>
+  <h5> Main Sport: <%= @profile.sport %> </h5>
+  <h5> Given level: <%= @profile.skill %> </h5>
+  <h5> User Rating: <%= @profile.get_upvotes.size %> </h5>
     </div>
   </div>
 
   <div class="col-lg-6">
       <div id="activity">
-        <h2 style = "text-align-center"> Your Activity </h2>
+        <h2 style = "text-align-center"> Friend's Activities </h2>
         <% if @activities.empty? %>
           <div class="well">
             <%= render('shared/no_resource', resources: 'Activities') %>
@@ -29,6 +30,7 @@
        <ul class="nav nav-pills nav-stacked">
          <li><%= link_to 'Edit Profile', edit_profile_path(current_user) %></li>
          <li><%= link_to 'Change password', edit_user_registration_path %></li>
+         <li><%= link_to 'Followers', followers_profile_path %> </li>
        </ul>
      </div>
    <% end %>

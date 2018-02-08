@@ -1,0 +1,15 @@
+<h1> Listing Followers </h1>
+<div class="row">
+  <% @followers.each do |user| %>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <img src="<%=user.profile.image%>" alt="Avatar" style="width: 30%;">
+        <div class="caption">
+          <h3><%=user.name%></h3>
+          <p>Plays <%=user.profile.sport%></p>
+          <p><a href="<%=publicshow_profile_path(user)%>" class="btn btn-primary" role="button">Profile</a></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
