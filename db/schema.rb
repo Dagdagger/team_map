@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171224112438) do
+ActiveRecord::Schema.define(version: 20180627125152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "achievements", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.integer  "profile_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "activities", force: :cascade do |t|
     t.string   "trackable_type"
@@ -38,8 +47,13 @@ ActiveRecord::Schema.define(version: 20171224112438) do
   end
 
   create_table "charges", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "coachprofile_id"
+    t.integer  "user_id"
+    t.integer  "amount"
+    t.index ["coachprofile_id"], name: "index_charges_on_coachprofile_id", using: :btree
+    t.index ["user_id"], name: "index_charges_on_user_id", using: :btree
   end
 
   create_table "chat_rooms", force: :cascade do |t|
@@ -64,7 +78,7 @@ ActiveRecord::Schema.define(version: 20171224112438) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "coach_id"
+    t.integer  "coach_id"
     t.string   "phonenumber"
     t.boolean  "location"
     t.string   "address"
@@ -73,6 +87,15 @@ ActiveRecord::Schema.define(version: 20171224112438) do
     t.string   "username"
     t.string   "email"
     t.string   "image"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "conversations", force: :cascade do |t|
@@ -97,6 +120,7 @@ ActiveRecord::Schema.define(version: 20171224112438) do
     t.integer  "user_id"
     t.integer  "attendance_id"
     t.string   "time"
+    t.boolean  "privacy"
   end
 
   create_table "follows", force: :cascade do |t|
@@ -109,6 +133,17 @@ ActiveRecord::Schema.define(version: 20171224112438) do
     t.datetime "updated_at"
     t.index ["followable_id", "followable_type"], name: "fk_followables", using: :btree
     t.index ["follower_id", "follower_type"], name: "fk_follows", using: :btree
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "sport"
+    t.text     "description"
+    t.string   "score"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_games_on_user_id", using: :btree
   end
 
   create_table "group_memberships", force: :cascade do |t|
@@ -135,6 +170,15 @@ ActiveRecord::Schema.define(version: 20171224112438) do
     t.string   "location"
   end
 
+  create_table "instaconvos", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["recipient_id"], name: "index_instaconvos_on_recipient_id", using: :btree
+    t.index ["sender_id"], name: "index_instaconvos_on_sender_id", using: :btree
+  end
+
   create_table "instamessages", force: :cascade do |t|
     t.text     "body"
     t.integer  "user_id"
@@ -156,6 +200,16 @@ ActiveRecord::Schema.define(version: 20171224112438) do
     t.string   "username"
   end
 
+  create_table "leagues", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "num_teams"
+    t.string   "sport"
+    t.string   "location"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text     "body"
     t.integer  "user_id"
@@ -164,6 +218,28 @@ ActiveRecord::Schema.define(version: 20171224112438) do
     t.datetime "updated_at",   null: false
     t.index ["chat_room_id"], name: "index_messages_on_chat_room_id", using: :btree
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "recipient_id"
+    t.integer  "actor_id"
+    t.datetime "read_at"
+    t.string   "action"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "user_id"
+    t.text     "description"
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string   "name"
+    t.string   "image"
+    t.integer  "user_id"
+    t.integer  "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -176,17 +252,38 @@ ActiveRecord::Schema.define(version: 20171224112438) do
     t.string   "sport"
     t.integer  "skill"
     t.text     "sportdescription"
-    t.string   "user_id"
+    t.integer  "user_id"
     t.string   "image"
     t.string   "displayname"
     t.string   "string"
     t.string   "phonenumber"
     t.integer  "rating"
+    t.integer  "wins"
   end
 
   create_table "ratings", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text     "description"
+    t.integer  "rating"
+    t.string   "title"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "user_id"
+    t.integer  "coachprofile_id"
+  end
+
+  create_table "supamessages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "instaconvo_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["instaconvo_id"], name: "index_supamessages_on_instaconvo_id", using: :btree
+    t.index ["user_id"], name: "index_supamessages_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -213,6 +310,9 @@ ActiveRecord::Schema.define(version: 20171224112438) do
     t.string   "integer"
     t.integer  "attendance_id"
     t.string   "name"
+    t.string   "provider"
+    t.string   "uid"
+    t.integer  "notification_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
@@ -233,8 +333,11 @@ ActiveRecord::Schema.define(version: 20171224112438) do
   end
 
   add_foreign_key "chat_rooms", "users"
+  add_foreign_key "games", "users"
   add_foreign_key "instamessages", "conversations"
   add_foreign_key "instamessages", "users"
   add_foreign_key "messages", "chat_rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "supamessages", "instaconvos"
+  add_foreign_key "supamessages", "users"
 end
