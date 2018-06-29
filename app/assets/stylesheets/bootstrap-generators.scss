@@ -3,10 +3,12 @@
 @import "global.scss";
 @import "bootstrap.scss";
 @import 'bootstrap-datetimepicker';
-@import "variables.css.scss";
+@import "variables.scss";
 
 body {
-  padding-top: 100px;
+  position: absolute;
+  top:-50px;
+  left: 230px;
 }
 
 .page-header {

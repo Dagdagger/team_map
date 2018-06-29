@@ -1,6 +1,6 @@
 class ChatRoomsController < ApplicationController
 	def index
-		@chat_rooms = @group.ChatRoom.all
+		@chat_rooms = ChatRoom.all
 	end
 
 	def new

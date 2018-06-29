@@ -33,11 +33,18 @@ class EventsController < ApplicationController
       redirect_to events_url, alert:  "Sorry theres already enough people for this event"
     end
 
-    if @event.need != 0
+    if @event.need != 0 && !@event.attendance.users.include?(current_user)
   	@event.update_attribute(:need, @event.need - 1)
+    end
+
+    if @event.privacy
+      redirect_to event_password, alert: "This event needs a password to join"
     end
     @event.attendance.users << current_user
     @attendees = @event.attendance.users.all
+  end
+
+  def password
   end
 
   def attendees
@@ -67,6 +74,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params.merge(name: current_user.profile.displayname, user_id: current_user.id))
     respond_to do |format|
       if @event.save
+        @game = current_user.games.create(:sport => @event.sport, :name => @event.name, :description => @event.description, :sport => @event.sport)
         @event.attendance.users << current_user
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
@@ -110,6 +118,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:address, :sport, :need, :time).merge(name: current_user.profile.displayname)
+      params.require(:event).permit(:privacy, :address, :sport, :need, :time).merge(name: current_user.profile.displayname)
     end
 end

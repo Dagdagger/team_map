@@ -1,3 +1,4 @@
 class Charge < ApplicationRecord
-  has_one :coachprofile
+  belongs_to :coachprofile
+  belongs_to :user
 end

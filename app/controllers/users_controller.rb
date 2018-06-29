@@ -2,7 +2,8 @@ class UsersController < ApplicationController
 
 
 def index
-	@users = User.order('fullname ASC')
+	@users = User.where.not("id = ?",current_user.id).order("created_at DESC")
+  @instaconvos= Instaconvo.involving(current_user).order("created_at DESC")
 end
 
 

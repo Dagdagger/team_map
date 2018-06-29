@@ -3,7 +3,7 @@
     <span class="glyphicon glyphicon-list-alt"></span>
     See Events
   <% end %>
-  <%= link_to edit_event_path(@event), class: 'btn btn-primary' do %>
+  <%= link_to edit_event_path(@event),data: { turbolinks: false }, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-pencil"></span>
     Edit
   <% end %>
@@ -25,6 +25,6 @@
   <dd><%= @event.need %></dd>
 
   <dt>Happening At </dt>
-  <dd> <%= @event.time%></dd> 
+  <dd> <%= @event.time%></dd>
 
 </dl>

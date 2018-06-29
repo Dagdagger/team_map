@@ -1,0 +1,16 @@
+<% @reviews.each do |review| %>
+  <%= review.user %>
+  <%= review.title %>
+  <%= review.description %>
+  <br>
+<% end %>
+
+<% if current_user %>
+<%= simple_form_for @review, :url => { :controller => 'coachprofiles', :action => 'write'} do |f| %>
+  <%= f.input :title %>
+  <%= f.input :description%>
+  <%= f.input :rating %>
+  <%= hidden_field_tag(:id, @coachprofile.id)%>
+  <%= f.submit 'Write!' %>
+<% end %>
+<% end %>

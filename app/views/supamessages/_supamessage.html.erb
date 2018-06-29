@@ -1,0 +1,11 @@
+<li class="<%=  self_or_other(supamessage) %>">
+  <div class="avatar">
+    <%= image_tag supamessage_interlocutor(supamessage).profile.image %>
+  </div>
+  <div class="chatboxmessagecontent">
+    <p><%= supamessage.body %></p>
+    <time datetime="<%= supamessage.created_at %>" title="<%= supamessage.created_at.strftime("%d %b  %Y at %I:%M%p") %>">
+      <%= supamessage_interlocutor(supamessage).name %> • <%= supamessage.created_at.strftime("%H:%M %p") %>
+    </time>
+  </div>
+</li>

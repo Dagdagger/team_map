@@ -7,6 +7,7 @@
   <h5> Main Sport: <%= @profile.sport %> </h5>
   <h5> Given level: <%= @profile.skill %> </h5>
   <h5> User Rating: <%= @profile.get_upvotes.size %> </h5>
+  <h5> User Wins <%= @profile.wins %> </h5>
     </div>
   </div>
 
@@ -31,6 +32,7 @@
          <li><%= link_to 'Edit Profile', edit_profile_path(current_user) %></li>
          <li><%= link_to 'Change password', edit_user_registration_path %></li>
          <li><%= link_to 'Followers', followers_profile_path %> </li>
+         <li><%= link_to 'Add achievements or records', profile_achievements_path %> </li>
        </ul>
      </div>
    <% end %>

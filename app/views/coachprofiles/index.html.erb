@@ -14,6 +14,7 @@
             <p>$ <%= coachprofile.price %></p>
             <p><%= link_to "Hire as Coach", {:controller => "charges", :action => "new", :id => coachprofile.id }  %> </p>
             <p><%= link_to "Hire as Referee", {:controller => "charges", :action => "new", :id => coachprofile.id } %></p>
+            <p><%= link_to "Reviews", {:controller => "coachprofiles", :action => "reviews", :id => coachprofile.id} %> </p>
             </li>
           </ul>
           </div>

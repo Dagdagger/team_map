@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
   def new
     @group = Group.new
   end
-
+  
   def show
     @group = Group.find(params[:id])
     @members = User.in_group(@group)

@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
+  <link rel="icon" type="image/png" href="/assets/ko.png">
+  <meta content='<%= user_signed_in? ? current_user.id : "" %>' name='user-id'/>
   <title>Team Map</title>
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -13,12 +15,16 @@
     <%= javascript_include_tag "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js", "https://oss.maxcdn.com/respond/1.4.2/respond.min.js" %>
   <![endif]-->
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-<%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css' %>
+  <%= javascript_include_tag 'application'  %>
+  <%= csrf_meta_tags %>
 </head>
 
 
+<% if !current_user %>
+<body style="left: 50px ! important;">
+  <% end %>
 <body>
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style=>
     <div class="container">
@@ -31,9 +37,14 @@
         </button>
 	<% if !current_user %>
         <%= link_to "Team Map", root_url, class: "navbar-brand", 'data-no-turbolink' => true  %>
+        <body style="left: 50px ! important;">
 	<% end %>
 	<% if current_user %>
 	<%= link_to "Team Map", events_url, class: "navbar-brand", 'data-no-turbolink' => true   %>
+  <%= subscribe_to "/chatroom" %>
+  <script>
+   PrivatePub.subscribe("/chatroom", function(data, channel) { var current_user_id = '#{current_user.try(:id)}'; if (data.receiver_id == current_user_id) { chatBox.chatWith(data.conversation_id); } }) %>
+   </script>
 	<% end %>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
@@ -54,9 +65,44 @@
 <% end %>
 
 		<% if current_user %>
+    <div class='btn-group pull-right right-nav'>
+     <button style="background-color:#000000" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+     <span class="glyphicon glyphicon-bullhorn vine"></span>
+   </button>
+     <ul class="dropdown-menu" role="menu">
+       <% current_user.notifications.each do |notification| %>
+       <li><%= notification.description%></li>
+       <% end %>
+    </ul>
+</div>
+
+<div class='btn-group pull-right right-nav'>
+ <button style="background-color:#000000" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+
+ <span class="glyphicon glyphicon-comment instachat"></span>
+</button>
+ <ul class="dropdown-menu" role="menu">
+   <% @users = User.all %>
+   <% @instaconvos= Instaconvo.involving(current_user).order("created_at DESC") %>
+   <% @users.each_with_index do |user, index| %>
+       <tr>
+         <td><%= index +=1 %></td>
+         <td><%= user.name %></td>
+         <td>
+           <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-instaconvo",
+                       "data-sid" => current_user.id, "data-rip" => user.id %>
+         </td>
+       </tr>
+   <% end %>
+</ul>
+</div>
+
 	<li>
 		<%= link_to "Create Event", new_event_path %>
 	</li>
+  <li>
+    <%= link_to "Leagues", leagues_path %>
+  </li>
   <li>
     <%= link_to "Groups", groups_path %>
   </li>
@@ -67,7 +113,10 @@
 		<%= link_to "Edit Account", edit_user_registration_path %>
 	</li>
   <li>
-      <%= link_to "Look at coaches", coachprofiles_index_path %>
+      <%= link_to "Trainers/Referees", coachprofiles_index_path %>
+  </li>
+  <li>
+      <%= link_to "Chat", users_path %>
   </li>
 		<li>
 		<%= link_to "Logout", destroy_user_session_path, method: :delete %>
@@ -90,11 +139,6 @@
       </div>
     </div>
   </nav>
-
-
-  </body>
-</html>
-
   <hr style="margin-top: 100px; margin-bottom: 50px; visibility: hidden;">
 
   <div class="container">
@@ -107,5 +151,10 @@
 
     <%= yield %>
   </div>
+
+
 </body>
+<% if current_user %>
+  <%= render 'shared/sidenav' %>
+  <% end %>
 </html>

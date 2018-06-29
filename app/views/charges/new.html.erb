@@ -8,10 +8,10 @@
 		<% end %>
 <p> You can contact your coach at <%= @coachprofile.email %> for any further questions </p>
 	        <label class="amount">
-			<span>Amount: <%= pretty_amount(@amount) %></span>
+			<span>Amount: <%= pretty_amount(@coachprofile.price * 100) %></span>
 		</label>
 	</article>
-	 <%= hidden_field_tag 'amount', @amount %>
+	 <%= hidden_field_tag 'coachprofile', @coachprofile.id %>
 
 	<script src="https://checkout.stripe.com/checkout.js" class = "stripe-button"
     data-key="<%= Rails.configuration.stripe[:publishable_key] %>"

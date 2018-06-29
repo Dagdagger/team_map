@@ -11,16 +11,17 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
-//= require bootstrap
 //= require_tree .
+//= require bootstrap
+//= require bootstrap.min
+//= require droppy
+//= require chat
+//= require users
 //= require Underscore
 //= require gmaps/google
 //= require gritter
 //= require cable
 //= require moment
 //= require bootstrap-datetimepicker
-
-$(function(){ $(document).foundation(); });
+//= require private_pub

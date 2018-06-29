@@ -9,13 +9,13 @@
 <table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
-          <th>Group Name</th>
-          <th>Group Sport</th>
-          <th>Located in: </th>
+          <th> Group Name</th>
+          <th> Group Sport</th>
+          <th> Located in: </th>
           <th> Join Group </th>
-          <th>See Group</th>
-      <th>Edit Group</th>
-      <th>Delete Group</th>
+          <th> Edit Group</th>
+          <th> Destroy Group</th>
+          <th> Chat Room </th>
     </tr>
   </thead>
 
@@ -26,11 +26,17 @@
           <td><%= group.location %></td>
           <% if !current_user.in_all_groups?(group, as: 'Captain') %>
           <td><%= link_to 'Join', groupjoin_url(group) %></td>
+          <% else %>
+          <td> Already Joined </td>
           <% end %>
           <% if current_user.in_all_groups?(group, as: 'Captain') %>
       <td><%= link_to 'Edit', edit_group_path(group) %></td>
       <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% else %>
+      <td> Can't Edit</td>
+      <td> Can't Destroy </td>
     <% end %>
+    <th> <%= link_to "Chat Room", chat_rooms_url %> </th>
     <% end %>
   </tbody>
 </table>

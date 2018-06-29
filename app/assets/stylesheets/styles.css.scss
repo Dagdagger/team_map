@@ -1,5 +1,33 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
+.vine{
+position: relative;
+padding-top: 17px;
+padding-left: 25px;
+padding-right: 0px;
+color: white;
+}
+
+.user-info {
+  float: right;
+  margin-top: 2px;
+  margin-right: -6px;
+  border-style: none none groove none;
+}
+.instachat {
+
+  padding-top: 18px;
+  padding-left: 25px;
+  padding-right: 10px;
+  color: white;
+
+
+}
+
+.form-control {
+
+}
+
 .activity {
   background: white;
   border: 1px solid #2BDB60;
@@ -20,6 +48,11 @@ $liked-color: #2a6496;
   padding: 7px 15px;
   border: none;
 }
+
+.sidebar{
+  padding-top: 100px;
+}
+
 
 .activity-event,
 .activity-post,
@@ -68,4 +101,68 @@ h6 {
 
 .liked {
   color: $liked-color !important;
+}
+
+
+.sidenav {
+  position: fixed;
+  top: 100px;
+  left: 0px;
+  width: 207px;
+  background-color: #fff;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+  > {
+    li {
+      > a {
+        display: block;
+        width: 190px \9;
+        margin: 0 0 -1px;
+        padding: 8px 14px;
+        border: 1px solid #e5e5e5;
+      }
+      &:first-child > a {
+        -webkit-border-radius: 6px 6px 0 0;
+        -moz-border-radius: 6px 6px 0 0;
+        border-radius: 6px 6px 0 0;
+      }
+      &:last-child > a {
+        -webkit-border-radius: 0 0 6px 6px;
+        -moz-border-radius: 0 0 6px 6px;
+        border-radius: 0 0 6px 6px;
+      }
+    }
+    .active > a {
+      position: relative;
+      z-index: 2;
+      padding: 9px 15px;
+      border: 0;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+      -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1), inset -1px 0 0 rgba(0, 0, 0, 0.1);
+      -moz-box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1), inset -1px 0 0 rgba(0, 0, 0, 0.1);
+      box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.1), inset -1px 0 0 rgba(0, 0, 0, 0.1);
+    }
+  }
+  .icon-chevron-right {
+    float: right;
+    margin-top: 2px;
+    margin-right: -6px;
+    opacity: .25;
+  }
+  > li > a:hover {
+    background-color: #f5f5f5;
+  }
+  a:hover .icon-chevron-right {
+    opacity: .5;
+  }
+  .active {
+    .icon-chevron-right, a:hover .icon-chevron-right {
+      background-image: url(../img/glyphicons-halflings-white.png);
+      opacity: 1;
+    }
+  }
 }
