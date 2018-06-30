@@ -6,5 +6,6 @@ class LeaguesController < ApplicationController
 
   def join
     if current_user.captain
+    end
   end
 end

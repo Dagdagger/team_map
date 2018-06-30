@@ -118,6 +118,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:privacy, :address, :sport, :need, :time).merge(name: current_user.profile.displayname)
+      params.require(:event).permit(:privacy, :address, :sport, :need, :time, :description).merge(name: current_user.profile.displayname)
     end
 end

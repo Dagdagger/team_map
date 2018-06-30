@@ -9,7 +9,6 @@ class User < ApplicationRecord
  after_create :create_profile, :create_default_conversation
  has_many :instamessages
  has_many :games
- has_many :photos
  has_many :charges
  has_many :conversations, foreign_key: :sender_id
  has_one :event, dependent: :destroy
@@ -20,10 +19,9 @@ class User < ApplicationRecord
  acts_as_voter
  acts_as_followable
  acts_as_follower
- groupify :group_member
  groupify :named_group_member
- belongs_to :gameparticipants
- belongs_to :attendance
+ groupify :group_member
+ has_many :attendances
  has_one :profile, dependent: :destroy
  has_many :chat_rooms, dependent: :destroy
  has_many :messages, dependent: :destroy

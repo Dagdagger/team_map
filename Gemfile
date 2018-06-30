@@ -8,6 +8,7 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'simple_form'
+gem 'private_pub'
 gem 'bootsnap'
 gem 'react-rails'
 gem 'react_on_rails', '~> 6'

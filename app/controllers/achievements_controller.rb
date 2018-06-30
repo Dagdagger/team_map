@@ -3,7 +3,7 @@ class AchievementsController < ApplicationController
   def index
   		@profile = Profile.find(params[:id])
   		@achievements = @profile.achievements.all
-	end
+  end
 
   def new
     @profile = Profile.find(params[:id])
@@ -18,7 +18,7 @@ class AchievementsController < ApplicationController
   def update
   end
 
-    
+
 
 
   def create

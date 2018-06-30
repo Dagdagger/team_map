@@ -232,6 +232,8 @@ GEM
     pg (1.0.0-x64-mingw32)
     pg (1.0.0-x86-mingw32)
     powerpack (0.1.2)
+    private_pub (1.0.3)
+      faye
     public_activity (1.5.0)
       actionpack (>= 3.0.0)
       activerecord (>= 3.0)
@@ -402,6 +404,7 @@ DEPENDENCIES
   npm-pipeline-rails
   omniauth-facebook
   pg
+  private_pub
   public_activity
   puma (~> 3.0)
   rails (~> 5.2)

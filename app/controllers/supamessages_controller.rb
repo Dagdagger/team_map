@@ -1,7 +1,7 @@
 class SupamessagesController < ApplicationController
 
 
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def create
    @instaconvo = Instaconvo.find(params[:instaconvo_id])
