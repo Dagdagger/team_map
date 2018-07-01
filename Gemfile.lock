@@ -354,7 +354,7 @@ GEM
       thread_safe (~> 0.1)
     tzinfo-data (1.2018.5)
       tzinfo (>= 1.0.0)
-    uglifier (4.1.12)
+    uglifier (4.1.13)
       execjs (>= 0.3.0, < 3)
     unicode-display_width (1.4.0)
     warden (1.2.7)
@@ -409,7 +409,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.2)
   react-rails
-  react_on_rails (~> 6)
+  react_on_rails (~> 6.0)
   record_tag_helper
   redis (~> 3.2)
   rubocop

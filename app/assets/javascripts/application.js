@@ -25,5 +25,6 @@
 //= require gritter
 //= require cable
 //= require moment
+//= require lightbox
 //= require bootstrap-datetimepicker
 //= require private_pub
