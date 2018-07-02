@@ -4,6 +4,12 @@
 
 const webpack = require('webpack');
 const pathLib = require('path');
+const path = require('path');
+const ManifestPlugin = require('webpack-manifest-plugin'); // we'll use this later
+
+const webpackConfigLoader = require('react-on-rails/webpackConfigLoader');
+const configPath = path.resolve('..', 'config');
+const { output } = webpackConfigLoader(configPath);
 
 const devBuild = process.env.NODE_ENV !== 'production';
 
@@ -17,8 +23,9 @@ const config = {
   ],
 
   output: {
-    filename: 'webpack-bundle.js',
-    path: pathLib.resolve(__dirname, '../app/assets/webpack'),
+    filename: '[name]-[chunkhash].js', // [chunkhash] because we've got to do our own cache-busting now
+    path: output.path,
+    publicPath: output.publicPath,
   },
 
   resolve: {
@@ -26,6 +33,10 @@ const config = {
   },
   plugins: [
     new webpack.EnvironmentPlugin({ NODE_ENV: 'development' }),
+    new ManifestPlugin({
+        publicPath: output.publicPath,
+        writeToFileEmit: true
+      }),
   ],
   module: {
     rules: [

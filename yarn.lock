@@ -5,3 +5,7 @@
 lightbox2@^2.10.0:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/lightbox2/-/lightbox2-2.10.0.tgz#06b3f7b7bd7c1332c20d037602d9657542fd7de4"
+
+react-on-rails@^11.0.9:
+  version "11.0.9"
+  resolved "https://registry.yarnpkg.com/react-on-rails/-/react-on-rails-11.0.9.tgz#6e292e14fdd01acc0d21498e78217de9e09b354c"
