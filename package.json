@@ -12,7 +12,15 @@
     "test": "rspec"
   },
   "dependencies": {
+    "@babel/preset-react": "^7.0.0-beta.51",
+    "@rails/webpacker": "^3.5.3",
     "lightbox2": "^2.10.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "react-on-rails": "^11.0.9"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.1.4"
   }
 }

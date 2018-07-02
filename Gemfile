@@ -10,7 +10,7 @@ end
 gem 'simple_form'
 gem 'private_pub'
 gem 'bootsnap'
-gem 'react_on_rails', '~> 9.0.0'
+gem 'react_on_rails', '9.0.0'
 gem 'thin'
 gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
 gem 'thin-rails'

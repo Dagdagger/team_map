@@ -270,7 +270,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    react_on_rails (9.0.3)
+    react_on_rails (9.0.0)
       addressable
       connection_pool
       execjs (~> 2.5)
@@ -395,7 +395,7 @@ DEPENDENCIES
   puma (~> 3.0)
   rails (~> 5.2)
   rainbow
-  react_on_rails (~> 9.0.0)
+  react_on_rails (= 9.0.0)
   record_tag_helper
   redis (~> 3.2)
   rubocop
