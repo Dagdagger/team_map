@@ -12,7 +12,8 @@ const config = {
     'es5-shim/es5-shim',
     'es5-shim/es5-sham',
     'babel-polyfill',
-    './app/bundles/HelloWorld/startup/registration',
+    'react-on-rails',
+    './app/bundles/App/startup/registration.jsx'
   ],
 
   output: {

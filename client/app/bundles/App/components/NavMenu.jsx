@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactOnRails from 'react-on-rails';
 import {Menu, MainButton, ChildButton} from 'react-mfb';
 
 export default class NavMenu extends React.Component {

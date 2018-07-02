@@ -64,10 +64,6 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     arel (9.0.0)
     ast (2.4.0)
-    babel-source (5.8.35)
-    babel-transpiler (0.7.0)
-      babel-source (>= 4.0, < 6)
-      execjs (~> 2.0)
     bcrypt (3.1.12)
     bcrypt (3.1.12-java)
     bcrypt (3.1.12-x64-mingw32)
@@ -271,24 +267,17 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rainbow (2.2.2)
-      rake
+    rainbow (3.0.0)
     rake (12.3.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    react-rails (2.4.4)
-      babel-transpiler (>= 0.7.0)
-      connection_pool
-      execjs
-      railties (>= 3.2)
-      tilt
-    react_on_rails (6.10.1)
+    react_on_rails (11.0.9)
       addressable
       connection_pool
       execjs (~> 2.5)
       rails (>= 3.2)
-      rainbow (~> 2.1)
+      rainbow (~> 3.0)
     record_tag_helper (1.0.0)
       actionview (~> 5.x)
     redis (3.3.5)
@@ -408,8 +397,8 @@ DEPENDENCIES
   public_activity
   puma (~> 3.0)
   rails (~> 5.2)
-  react-rails
-  react_on_rails (~> 6.0)
+  rainbow
+  react_on_rails (~> 11.0.9)
   record_tag_helper
   redis (~> 3.2)
   rubocop

@@ -10,8 +10,7 @@ end
 gem 'simple_form'
 gem 'private_pub'
 gem 'bootsnap'
-gem 'react-rails'
-gem 'react_on_rails', '~> 6.0'
+gem 'react_on_rails', '~> 11.0.9'
 gem 'npm-pipeline-rails'
 gem 'thin'
 gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
@@ -50,6 +49,7 @@ gem "twilio-ruby"
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3'
 gem 'redis', '~> 3.2'
+gem 'rainbow'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
